@@ -26,14 +26,18 @@ def youtube_search(query_term, max_results, page_token=None):
 if __name__ == "__main__":
     query_term = sys.argv[1]
     max_results = sys.argv[2]
-    video_list, next_page_token = youtube_search(query_term, max_results)
-    if len(video_list) != 0:
-        print(video_list)
-
-    # Second page
-    print("Second page--------------------------------")
-    video_list, next_page_token = youtube_search(query_term, max_results, page_token=next_page_token)
-    if len(video_list) != 0:
-        print(video_list)
+    # Loop to generate 5 pages of search results
+    for _ in range(5):
+        video_list, next_page_token = youtube_search(query_term, max_results)
+        if len(video_list) != 0:
+            print(video_list)
+        
+        if next_page_token:
+            print("Next page--------------------------------")
+            video_list, next_page_token = youtube_search(query_term, max_results, page_token=next_page_token)
+            if len(video_list) != 0:
+                print(video_list)
+        else:
+            break  # No more pages available, exit the loop
 
     
