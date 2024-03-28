@@ -15,6 +15,9 @@ def youtube_search(query_term, max_results):
     for item in search_response['items']:
         search_list.append(item)
     
+    if len(search_list) < int(max_results):
+        print("No more results")
+
     return search_list
 
 if __name__ == "__main__":
